@@ -16,11 +16,21 @@ function add(x, y) {
 var functionObject = new Function("x", "y", "return x + y;");
 
 /**
- * create a funcation variable
+ * create a funcation variable, anonymous function
  */
 var add = function(x, y) {
 	return x + y;
 };
+
+/**
+ * create a function with a function expression, a named one
+ */
+var subtract = function subtract(a, b) {
+	return a - b;
+}
+
+console.log("function add without function name %s", add.name);
+console.log("function substract is named with %s", subtract.name);
 
 /** pass function as parameter */
 var a = [1, 2, 3];

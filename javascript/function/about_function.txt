@@ -1,12 +1,19 @@
-1. 定义函数的三种反式：定义，直接量， Function构造函数, 注意使用Function构造的函数使用全局作用域。
-2. 函数可以作为参数传递，也可复制。
-3. 函数可嵌套
+1. 在javascript中，函数是对象，定义函数的三种反式：定义(function declarations)，直接量(function expression)， Function构造函数, 注意使用Function构造的函数使用全局作用域。函数可以在运行时动态创建。
+2. 函数可以作为参数传递，也可付值，可被删除,也可以作为函数的返回值。
+3. 函数可嵌套，可以有自己的属性和方法。
 4. 特殊的变量： arguments, arguments.callee
 5. call & apply的用法
-6. 作用域，以及scope chain的概念，作用域对于性能的影响，注意global的变量的使用。
+6. 作用域在javascript中作用域不是由大括号来控制，而是看有没有wrap的函数，在if等块中定义的变量在所包含的函数中可见，以及scope chain的概念，作用域对于性能的影响，注意global的变量的使用。
    cache global variables in local ones, refer to <<High Performance Javascript>>  - Managing scope.
 7. Scope chain augmentation,  with & catch block， 避免使用with
    with 会使scope chain 的顺序发生改变， 是原本local的变量变为第二级，with的对象称为第一级。
 8. 动态作用域： with， try－catch，  functions using eval
 9. Closure - 闭包, 允许在函数的作用域外访问函数local的数据。
    注意：闭包会到导致更多的内存使用，并且使用不当会存在内存泄漏。
+10. The semicolon is not needed in function declarations but is required in function expressions, and you should always use it even though the automatic semicolon insertion mechanism might do it for you.
+11. 一般在回调，或者定义object属性时使用函数表达式。函数定义和有名字的函数表达式都具有“name”属性，在调试和递归的时候有用。
+12. callback pattern, pay attention to callback scope (this???) (see <<Javascript Patterns>> Chapter 4. Functions)
+	－ use call/apply to resolve scope issues.
+	－ 回调通常用于事件驱动编程的监听器中。
+    － setTimeout, setInterval, nextTick, setImmediate
+    - when build a library, provide callback support as hooks
