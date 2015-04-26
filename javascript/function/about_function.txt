@@ -1,0 +1,12 @@
+1. 定义函数的三种反式：定义，直接量， Function构造函数, 注意使用Function构造的函数使用全局作用域。
+2. 函数可以作为参数传递，也可复制。
+3. 函数可嵌套
+4. 特殊的变量： arguments, arguments.callee
+5. call & apply的用法
+6. 作用域，以及scope chain的概念，作用域对于性能的影响，注意global的变量的使用。
+   cache global variables in local ones, refer to <<High Performance Javascript>>  - Managing scope.
+7. Scope chain augmentation,  with & catch block， 避免使用with
+   with 会使scope chain 的顺序发生改变， 是原本local的变量变为第二级，with的对象称为第一级。
+8. 动态作用域： with， try－catch，  functions using eval
+9. Closure - 闭包, 允许在函数的作用域外访问函数local的数据。
+   注意：闭包会到导致更多的内存使用，并且使用不当会存在内存泄漏。
