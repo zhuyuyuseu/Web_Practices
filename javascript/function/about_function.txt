@@ -17,3 +17,4 @@
 	－ 回调通常用于事件驱动编程的监听器中。
     － setTimeout, setInterval, nextTick, setImmediate
     - when build a library, provide callback support as hooks
+13. check function
