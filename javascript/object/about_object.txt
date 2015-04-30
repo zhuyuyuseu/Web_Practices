@@ -1,0 +1,37 @@
+1. JavaScript是面向对象的，不同于java, c++的基于类的面向对象，Javascript是基于原型(prototype)对象的。
+2. 在javascript中除了5种原始类型(number, string, boolean, null, undefined)不是对象，其余都是对象，其中前三中原型对象都有wrapper。
+3. Functions are objects!
+4. An object is just a collection of named properties,
+a list of key-value pairs (almost identical to an associative array in other languages). Some of the properties could be functions (function objects), in which case we call
+them methods.
+ 注意：Javascript对象是可以随时被改变的(Mutable)
+5. 在Javascript中有以下种类型的对象：
+   - native (ECMAScript定义的javascript core部分的对象)
+   - Host (宿主环境提供的对象，例如浏览器，node)
+   - user-defined
+6. a blank object - 并不意味着完全空，有一些继承自Prototype的内建属性，这些属性不能通过for/in打出来。
+7. 在js中，到处都是对象的组合。
+8. 关于prototype
+   - 创建对象如下几种方法：
+      - literal
+      - constructor
+      相比于构造函数，literal更加简洁，且没有scope的解析，构造函数调用会查找scope chain直到global Object.
+   - js的继承基于prototype, prototype本身也是个对象，js会给每个function自动创建prototype属性指向一个blank对象，即new Object()
+   - 实现继承
+   - 可重用的属性应定义在prototype中。
+   - The prototype chain is live, which means all objects
+   - Don't augmenting built-in prototypes,不要随意的扩展prototype,特别是对于Object(), Function(), Array()会引起不可预测的后果，因为改变对于其他继承该对象的对象是立即可见的。
+automatically get access to the new method
+9. for-in loops should be used iterate over nonarray objects
+10. use hasOwnProperty() to check if a property is defined.
+11. var a = new Person()的具体过程如下：
+    - 创建一个空对象然后由this引用，同时继承了构造函数Person的prototype.
+    - 相关的属性和方法都被加到this引用的对象。
+    - 返回this
+  注意.如果在调用构造函数没有用new, this可能会变为global.解决方案参考ForceNew.js, 或者use strict会报错
+12. 判断一个对象是不是某个构造函数的实例：
+    - instanceof
+    - Object.prototype.toString.call(obj)
+13. JavaScript提供了对于原始类的包装类，如Number, String, Boolean, 这些类会提供额外的有功能。
+14. Error Objects例如Error(), SyntaxError(), TypeError(),
+这些功能和throw语句一起使用。
