@@ -34,4 +34,4 @@ automatically get access to the new method
     - Object.prototype.toString.call(obj)
 13. JavaScript提供了对于原始类的包装类，如Number, String, Boolean, 这些类会提供额外的有功能。
 14. Error Objects例如Error(), SyntaxError(), TypeError(),
-这些功能和throw语句一起使用。
+这些功能和throw语句一起使用。这些error对象包括name和message属性。

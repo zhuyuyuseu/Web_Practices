@@ -1,0 +1,2 @@
+1. Namespace Pattern
+   命名空间有助于减少对全局作用域的污染, 参考NameSpaceExample.js

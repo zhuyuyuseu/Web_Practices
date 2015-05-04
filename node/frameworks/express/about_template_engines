@@ -1,0 +1,9 @@
+1. consolidate.js to support all kinds of template
+  http://www.quora.com/What-is-the-best-node-js-template-engine
+2. dust template used with kraken
+  http://www.dustjs.com/ (by LinkedIn)
+  https://github.com/akdubya/dustjs
+  http://akdubya.github.io/dustjs/
+3. Keep in mind that any additional template engines you wish to use should be added to your package.json dependencies object
+4. In development environment enable view cache~
+
