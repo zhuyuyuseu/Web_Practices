@@ -1,2 +1,58 @@
 1. Namespace Pattern
-   命名空间有助于减少对全局作用域的污染, 参考NameSpaceExample.js
+   命名空间有助于减少对全局作用域的污染, 同时可以减少名字冲突和过长的名字前缀，参考NameSpaceExample.js
+   通常定义一个global的变量，名字大写，命名空间可以采用域名或者company name.
+
+   缺点：
+   由于可以通过global访问，可能会被其他code修改模块的内容。
+   如果命名空间嵌套比较深，会增加property lookup的开销。
+   通过sandbox模式可以解决该问题。
+
+   在创建一个命名空间或者添加一个属性的时候可以加以check,防止覆盖已定义的空间或者属性。
+
+   在function开始地方，声明依赖并用局部变量cache，提升速度。例如：
+    var myFunction = function () {
+      // dependencies
+      var event = YAHOO.util.Event,
+      dom = YAHOO.util.Dom;
+      // use event and dom variables
+      // for the rest of the function...
+      };
+
+
+2. 私有属性和方法
+  - JavaScript不能像Java/C++支持对成员变量访问权限的声明(private/protected/package)，所有的属性都是public的。
+  - 可以通过闭包来实现private members.
+  参考PrivateExample.js
+  - 但如果通过闭包访问到内部对象的引用，则可以改变闭包内部的对象，解决办法如下：
+    1. 根据Principle of Least Authority (POLA)原则，返回需要的属性，即把需要返回的属性copy到一个object中返回。
+    2. deep copy.
+  - 通过constructor及闭包的实现的弊端是私有变量其实相当于类变量，不是每个object只有的。可以将这些变量挪到prototype中，节省内存。
+
+3. 沙盒模式
+  use a global constructor.
+  让代码执行在沙盒中彼此互不干扰。
+  refer to SandboxExample.js
+
+4. Static Members
+  refer to StaticMembers.js
+  - They can contain methods
+and data that are not instance-specific and don’t get re-created with every instance.
+
+5. constants
+  - define constants with all CAPs, for example: Math.PI
+  - A more complex modules to define constants
+
+6. chaining
+  - The chaining pattern enables you to call methods on an object one after the other
+  - refer to ChainingExample.js
+  - examples: jquery/express
+
+7. inheritance
+  - 继承是重用代码的一种方式
+  - prototype chain analysis *******
+  - refer to InheritanceExample.js
+
+8. Singleton
+  - refer to Singleton.js
+
+9. Built-in Object Factory for primitive types
