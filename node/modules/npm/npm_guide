@@ -1,0 +1,108 @@
+1. JavaScript主要的模块化标准：
+   - AMD (Front)
+     实现：require.js....
+   - CommonJS (Node.js/io.js)
+   - ESMAScript 6 新标准
+   http://addyosmani.com/writing-modular-js/
+   http://javascript.ruanyifeng.com/nodejs/commonjs.html
+2. Node modules:
+   https://nodejs.org/api/modules.html
+3. npm document:
+   https://docs.npmjs.com/
+4. 引用模块：
+   - var math = require('math') //import math.js
+   - var Bundle = require('./lib/bundle.js')// import with relative path
+   - var http = require('http') //core module or located in a node_modules folder
+   - var subFileOfModule = require('example-module/path/to/file')
+   - error: 'MODULE_NOT_FOUND'
+5. 定义一个模块
+   - 在node中一个文件就是一个模块
+   - 上下文提供require来载入模块，同时上下文提供exports对象来导出模块，exports是唯一的导出出口， 例如：
+      example 1:
+      exports.add = function () {} //in math.js
+      var math = require('math.js'); // import module
+      math.add();
+
+      example 2:
+      module.exports = function () {
+         return {
+           f: function () {};
+         };
+      };
+   - 模块标识符，及require里面识别的参数，可以是相对路径，绝对路径，或者符合模块命名规则的小驼峰规则字符串
+
+6. Node模块的种类： 核心模块（built-in,二进制）/文件模块
+   - 部分核心模块在node启动时已载入，优先于文件模块被加载
+   - 文件模块运行时加载，加载后被缓存，缓存的是编译和执行后的对象，所以后续性能会很高
+   - 文件模块类型：
+     .js javascript文件
+     .json JSON
+     .node 编译过的addon模块，通过dlopen同态载入，一般为性能比较高的C++扩展
+   - core modules: https://nodejs.org/api/all.html
+
+7. Node模块载入的过程
+    - 路径分析 ->文件定位 -> 编译执行
+    - 路径分析：
+      - 模块标识分析，核心模块优先级仅次于缓存模块
+      - 如果自定义模块与核心模块同名，则可以通过文件路径形式的标识载入，例如： require('./http.js')
+      - 路径形式的文件模块
+      循环依赖： https://nodejs.org/api/modules.html （Cycles）
+      - 自定义模块的模块路径（node_modules）
+        console.log(module.paths)
+        寻找路径和上述语句打出来的一致，即从当前路径下的node_modules，向上级的node_modules目录依次搜索
+        加载速度较慢
+        参考：'Loading from node_modules Folders' in
+        https://nodejs.org/api/modules.html
+    - 文件定位
+      - 扩展名分析，如果没有extension, 按照.js,.node,.json一次查找
+      - 自定义扩展名分析require.extensions['.ext'] = function() {...}
+      - 指定extension会加快加载速度
+      - 目录分析和包
+        如果路径分析结果是目录，则通常当作包来处理
+        - 首先分析该目录下有没有package.json (https://docs.npmjs.com/files/package.json),找到里面的main属性
+        - 如果main分析错误，或者package.json不存在，则查找index.js/.node/.json
+        - 如果分析失败则进入下一个模块路径查找
+        - 如果遍历module.paths还没找到，报错
+    - 编译
+      - .js文件通过fs模块读入后编译执行
+      - .node 通过dlopen()加载
+      - .json 通过fs模块读入再通过JSON.parse()解析
+      - 其余扩展名字都被当作js
+      - 被缓存的模块通过Module._cache可以查看
+      - Module._extensions | require.extensions
+8. js文件模块的编译
+   - node对每个获取的js文件都进行额外的包装，这样每个js都有自己独立的context，不会污染全局，即通过如函数包装：
+    (function(exports, require, module, __filename, __dirname) {\n ... \n})
+    exports属性最后会被返回，既可以访问通过exports属性暴露的属性
+    为什么有时候需要module.exports=而不是exports=呢？ scope chain分析
+     - 因为exports通过形参传入，返回后不会改变exports的值
+     - more about module object参考 https://nodejs.org/api/modules.html
+9. NODE_PATH
+10. Recommend to place dependencies locally in node_modules
+11. In Linux:
+    /usr/lib/node_modules/
+    export NODE_PATH=/usr/lib/node_modules:${NODE_PATH}
+12. Package & NPM
+   - https://docs.npmjs.com/
+   - Package是第三方模块很好的被编写和管理， 解决了依赖关系的组织
+   - 包文件的描述package.json
+   - 其他目录：/bin, /lib, /doc, /test
+   - 如何判断第三方包的好坏：
+     - 看npm站点下载量，依赖榜（被依赖的模块）
+     - 看github上的统计
+     - 看/doc, /test
+     - 良好的readme
+   - 安装第三方包：
+     - npm install [-g --save]
+     - 全局安装
+     - 本地安装，支持tarball, tarball url, folder,这些归档或文件夹下必须有package.json
+   - 初始化一个包
+     - npm init
+   - npm scripts
+   - npm ls (检查当前路径能引入的所有包)
+   - npm config [-g]
+13. NPM Enterprise
+14. 前后台模块的侧重点：
+   - 前端侧重带宽，大量js需要分发到浏览器
+   - 后端侧重内存，CPU
+15. Examples: refer to examples in folder module_examples.
