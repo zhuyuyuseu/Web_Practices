@@ -1,1 +1,217 @@
-1. format code with Sublime Text - JsFormat plugin.
+1.  idention(缩进)
+  2 Spaces for indention
+2.  Newlines
+  use Unix new line '\n'
+3.  Whitespace
+  - no trailing white space
+  - use space around operators, and brackets
+    e.g.
+    var foo = 'a' + 'b';
+    if (true) {
+      //some code
+    }
+4. Use Semicolons
+  - 给表达式结尾添加分号
+    e.g.
+    var f = function () {
+      var a = 'hello';
+    }; //use semicolons for expression
+5.  80 characters per line
+6.  Using single quotes
+  - 字符串尽量使用单引号,双引号通常有转义
+    e.g.
+      var str = 'a string';
+  - JSON中字符用双引号，注意转义
+7.  Opening braces go on the same line
+  - 大括号无需另起一行
+    e.g.
+      if (true) {
+        console.log('winning');
+      }
+8.  Always use var to declare variables, or the variables declared without var will be global ones.
+10. Declare one variable per var statement
+    e.g.
+      var assert = require('assert');
+      var fork = require('child_process').fork;
+      var net =require('net');
+11. Using comma
+    - Use trailing commas and put short declarations on a single line. Only quote keys when your interpreter complains:
+    e.g.
+      var a = ['hello', 'world'];
+      var b = {
+        good: 'code',
+        'is generally': 'pretty'
+      };
+12. Method Chaining
+    - One method per line should be used if you want to chain methods.
+    - You should also indent these methods so it's easier to tell they are part of the same chain.
+    e.g.
+      User
+        .findOne({ name:'foo' })
+        .populate('bar')
+        .exec(function() {
+          return true;
+        });
+13. 'use strict'
+14. Naming convention
+    - Variables, properties and function names should use lowerCamelCase. They should also be descriptive. Single character variables and uncommon abbreviations should generally be avoided.
+    e.g.
+      var adminUser = { userInfo: {} };
+      function isAdmin () {}
+    - Use UpperCamelCase for constructors
+    e.g.
+      function User () {
+        this.name = '';
+      }
+    - User UPPERCASE for Constants, Constants should be declared as regular variables or static class properties, using all uppercase letters.
+    e.g.
+      var SECOND = 1 * 1000;
+      function File () {
+
+      }
+      File.FULL_PERMISSIONS = 0777;
+    - File name, use lower case with underscore concating multi words
+    e.g.
+      child_process.js, string_decode.js
+      _linklist.js (private files)
+    - Package name, don't use 'js' or 'node' in the name, if there're multi words, use dash '-' as delimiter.
+    e.g
+      express
+      console-trap
+15. Use the === operator, == is context dependent, === is strict.
+    e.g.
+      '' == 0 //true
+      '' === 0 //false
+16. Don't extend built-in prototypes
+    e.g. (wrong!!!!!)
+      Array.prototype.slice = function () {};
+      Object.prototype.empty = function () {};
+      Function.prototype.empty = function () {};
+17. Use descriptive conditions
+    e.g.
+      wrong!!!!!
+      if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
+        console.log('losing');
+      }
+
+      right!!!!
+      var isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
+
+      if (isValidPassword) {
+        console.log('winning');
+      }
+18. Write small functions, keep it short
+19. Use literal
+    e.g.
+    //use
+    var a = {};
+    var b = [];
+    var str = 'a';
+    var boolVal = false;
+    var aNumber = 1;
+    //don't use
+    new Array(), new Object(), new Number(), new String(), new Boolean
+20. Scope, avoid using 'with' and 'eval()'
+21. Use for/in loops of non-array objects
+    e.g.
+    var obj = {};
+    for(var k in obj){
+
+    }
+
+    var array = ['a', 1];
+    for(var i = 0, length = array.length; i < length; i++) {
+      //do something
+    }
+22. Name the closures
+    e.g.
+      //name closure 'onEnd' will simplify debugging
+      req.on('end', function onEnd() {
+        console.log('winning');
+      });
+      //don't use
+      req.on('end', function() {
+        console.log('losing');
+      });
+23. No nested closure
+    e.g.
+    //Don't do this
+    setTimeout(function() {
+      client.connect(function() {
+        console.log('losing');
+      });
+    }, 1000);
+    //Instead
+    setTimeout(function() {
+      client.connect(afterConnect);
+    }, 1000);
+
+    function afterConnect() {
+      console.log('winning');
+    }
+24. Callbacks, sync/async Style
+    - use async/non-blocking versions of things as more as possible
+    - The callback should always be the last argument in the list. Its first argument is the Error or null.
+    - Just send the error message back as the first argument to the callback.
+    e.g.
+      function callback (err, data) {
+        if (err) {
+          handleError(err);
+        }
+        //do something
+      }
+    - Callback should be invoked once.
+25. Add comments to every methods, refer to JSDoc:
+      http://usejsdoc.org/
+26. Use util.inherits for inheritance
+27. Always check for errors in callbacks and return
+    - only JavaScript does not halt function execution when it hits it. It can be easy to accidentally let execution continue after calling a callback
+    e.g.
+      function writeCsvFile(target, data, callback) {
+        convertToCsv(data, function (err, csv) {
+          if (err) {
+            return callback(err);
+          }
+          writeFile(target, csv, callback);
+        });
+      }
+28. Only throw in sychronous functions
+    - Unfortunately, you can't use try-catch blocks around asynchronous code. That means any exceptions you throw will not be caught and bubble up to the top. This can kill your entire server process if you don't have an uncaughtException handler set up. Even in cases where you do, the error probably no longer has any meaningful context and you can't appropriately respond to a http request, for example.
+    - Always, always, always pass errors back to the callback in asynchronous functions. As long as you're following the "Always check for errors in callbacks" rule the errors will be handled in the appropriate place.
+
+    e.g.
+    function getRecord(id, callback) {
+      http.get('http://foo/' + id, function (err, doc) {
+        if (err) {
+            return callback(err);
+        }
+        if (doc.deleted) {
+            return callback(new Error('Record has been deleted'));
+        }
+        return callback(null, doc);
+      });
+    }
+29. Catch errors in sync calls
+    e.g.
+  function readJson(filename, callback) {
+    fs.readFile(filename, function (err, content) {
+      if (err) {
+        return callback(err);
+      }
+      try {
+        var data = JSON.parse(content.toString());
+      }
+      catch (e) {
+        return callback(e);
+      }
+        return callback(null, data);
+      });
+    }
+Resources:
+  - format code with Sublime Text - JsFormat plugin.
+  - https://www.exratione.com/2014/01/setting-up-sublime-text-3-for-javascript-development/
+  - https://github.com/felixge/node-style-guide
+  - https://docs.npmjs.com/misc/coding-style
+  - http://caolanmcmahon.com/posts/nodejs_style_and_structure/
+  - http://javascript.crockford.com/code.html
+  - http://jshint.com/docs/

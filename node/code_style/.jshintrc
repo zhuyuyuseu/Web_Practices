@@ -28,7 +28,22 @@
     "dojo": false,
 
     // Custom predefined globals.
-    "predef": [],
+    "predef": [
+        "document",
+        "module",
+        "require",
+        "__dirname",
+        "process",
+        "console",
+        "it",
+        "xit",
+        "describe",
+        "xdescribe",
+        "before",
+        "beforeEach",
+        "after",
+        "afterEach"
+    ],
 
     // Development
 
@@ -44,7 +59,6 @@
     "strict": false,
     // Whether global "use strict"; should be allowed (also enables strict).
     "globalstrict": true,
-
 
     // The Good Parts
 
@@ -100,9 +114,9 @@
     // Whether one-case switch statements should be allowed.
     "onecase": false,
     // Whether non-standard (but widely adopted) globals should be predefined.
-    "nonstandard": false,
+    "nonstandard": true,
     // Allow multiline strings.
-    "multistr": false,
+    "multistr": true,
     // Whether line breaks should not be checked around commas.
     "laxcomma": false,
     // Whether semicolons may be ommitted for the trailing statements inside of a
@@ -111,7 +125,7 @@
     // Whether the `__iterator__` property should be allowed.
     "iterator": false,
     // Whether only function scope should be used for scope tests.
-    "funcscope": false,
+    "funcscope": true,
     // Whether es.next specific syntax should be allowed.
     "esnext": false,
 
@@ -119,7 +133,7 @@
     // Style preferences
 
     // Whether constructor names must be capitalized.
-    "newcap": false,
+    "newcap": true,
     // Whether empty blocks should be forbidden.
     "noempty": false,
     // Whether using `new` for side-effects should be forbidden.
@@ -136,9 +150,9 @@
     // Whether trailing whitespace rules apply.
     "trailing": false,
     // Specify indentation.
-    "indent": 4,
+    "indent": 2,
     // Whether strict whitespace rules apply.
-    "white": false,
+    "white": true,
     // Quote formatting
     "quotmark": true,
 
@@ -151,5 +165,9 @@
     // Maximum number of statements per function.
     "maxstatements": 25,
     // Maximum cyclomatic complexity.
-    "maxcomplexity": 6
+    "maxcomplexity": 6,
+    "maxlen": 80,
+    "camelcase": true,
+    "freeze": true,
+    "es5": true
 }

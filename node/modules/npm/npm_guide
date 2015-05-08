@@ -10,7 +10,7 @@
 3. npm document:
    https://docs.npmjs.com/
 4. 引用模块：
-   - var math = require('math') //import math.js
+   - var math = require('./math.js') //import math.js
    - var Bundle = require('./lib/bundle.js')// import with relative path
    - var http = require('http') //core module or located in a node_modules folder
    - var subFileOfModule = require('example-module/path/to/file')
@@ -55,7 +55,7 @@
         https://nodejs.org/api/modules.html
     - 文件定位
       - 扩展名分析，如果没有extension, 按照.js,.node,.json一次查找
-      - 自定义扩展名分析require.extensions['.ext'] = function() {...}
+      - 自定义扩展名分析require.extensions['.java'] = function(data) {...}
       - 指定extension会加快加载速度
       - 目录分析和包
         如果路径分析结果是目录，则通常当作包来处理
