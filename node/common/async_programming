@@ -19,9 +19,38 @@
     - 请求对象 ==> event object(request object, data)
 5.  异步编程的挑战：
     - 流程控制（非线性思维）
+        1. 事件的发布／订阅 （Events, eventproxy, event-emitter）, 关注事件的设计，事件点预示着应用到达某一个状态，联想生命周期，例如ajax, http.request
+        如果事件过多，会导致内存泄漏，过多占用cpu的情景。
+        https://nodejs.org/api/events.html
+        利用时间队列解决雪崩问题（events.EventEmitter.once()）
+        多事件的协作
     - 事件驱动
     - 函数式编程
     - 调试
+    - 嵌套过深
+    - 阻塞代码
+      setTimeout
+    - 异常的处理
+      原则1: 必须执行传入的callback
+      原则2: 正确传递回异常供调用者判断
+      原则3: 确保callback只调用一次
+      example 1：
+       var async = function (callback) {
+        process.nextTick(function() {
+            var results = something;
+            if (error) {
+                return callback(error);
+            }
+            callback(null, results);
+        });
+       };
+       example 2:
+       try {
+        doSomething();
+       } catch (err) {
+        return callback(err);
+       }
+       callback();
 6.  高阶函数（函数即可为参数也可返回）
     - forEach, map, reduce, reduceRight, filter, every, some
 7.  后续传递风格 - 进业务重点从返回值转到回调函数。
