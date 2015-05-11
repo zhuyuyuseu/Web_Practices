@@ -21,7 +21,9 @@
     - 流程控制（非线性思维）
     - 事件驱动
     - 函数式编程
+    - 调试
 6.  高阶函数（函数即可为参数也可返回）
     - forEach, map, reduce, reduceRight, filter, every, some
 7.  后续传递风格 - 进业务重点从返回值转到回调函数。
 8.  Events
+9.  将大量计算分为小量通过setImmediate调度

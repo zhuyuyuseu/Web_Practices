@@ -1,2 +1,7 @@
 1. ka is a generator in combination of cg-angular and kraken
-2.
+2. learning JR's example:
+  - sso: 
+    package.json "acxiom-web": "git+ssh://git@stash.acxiom.com:7999/acxm/sso-library-node.git#develop"
+    config.json: see "acxiom.web", "sso" and "globalNav"
+    index.js:  aweb.initialize(config.get('acxiom.web'));
+    layout/master.dust
