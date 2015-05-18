@@ -1,0 +1,55 @@
+1. Unit test
+  - 单元测试设计的一些问题
+    断言(assert, should, chai & chai-as-promised)
+      - Object.prototype is extended with should
+    测试框架(mocha, supertest)
+    测试用例
+    覆盖率(JSCover/jscover/jscoverage/blanket & grunt-blanket/)
+      - http://tntim96.github.io/JSCover/
+      - https://github.com/node-modules/jscover/tree/master/test
+      - https://github.com/fishbar/jscoverage
+      - https://www.npmjs.com/package/blanket
+      - https://github.com/alex-seville/blanket/blob/master/docs/getting_started_node.md
+    mock
+      - replace real dbs, networks, fs with mock
+      - modules: muk
+    CI
+     - Integrate with Sonar
+      http://xseignard.github.io/2013/04/25/quality-analysis-on-node.js-projects-with-mocha-istanbul-and-sonar/
+      https://www.npmjs.com/package/mocha-sonar-reporter
+     - travis-ci &  github (TODO)
+
+    异步代码的测试
+      - add done() as mark
+      - return promise, use chai-as-promised
+
+    私有方法的测试
+
+2. BDD / TDD 风格
+
+3. Mocha report for Sonar
+   mocha-sonar-reporter/grunt-mocha-test
+
+4. 测试代码的组织
+  测试代码通常在test目录下面
+
+5. 异步测试
+  - mocha中注入done回调
+  - chai-as-promise
+  - 超时设置
+
+6. 性能测试
+  - 负载测试
+  - 压力测试
+    ab, siege, http_load
+  - 基准测试 (基准测试驱动开发)
+    benchmark
+
+7. Web测试
+  - karma
+  - panthom.js
+
+代码编写原则：
+    单一职责
+    接口抽象
+    层次分离

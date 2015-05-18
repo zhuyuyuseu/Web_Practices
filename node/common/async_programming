@@ -24,6 +24,39 @@
         https://nodejs.org/api/events.html
         利用时间队列解决雪崩问题（events.EventEmitter.once()）
         多事件的协作
+        2. Promise/Defferred 异步调用，延时传递
+          - http://wiki.commonjs.org/wiki/Promises
+            如果一个函数接受一个Promise作为输入，则必须返回一个Promise,同事注意对不可预测的错误处理，不要把原始的
+            Promise直接返回。
+          Defferred维护异步模型的状态
+          - Promise/A
+            http://wiki.commonjs.org/wiki/Promises/A
+            三个状态： 未完成， 完成，失败
+            状态转换： 未完成 -> 完成|失败
+            状态一旦转换，将不能改变
+            Promise对象只要具备then()方法即可，
+            then(fulfilledHandler, errorHandler, progressHandler)
+            then方法继续返回Promise
+          - e.g.
+           $.get('')
+            .success()
+            .fail()
+
+           function PasswordChecker(accounts) {
+                return function (user, password) {
+                      var passwordHash = Q.get(accounts, user);
+                        return when(passwordHash, function (passwordHash) {
+                          if (hash(password) === passwordHash)
+                            return true;
+                         };
+              };
+            }
+          - separate resolving from observing resolution
+          - Libraries： q，when, node-promise, jQuery, mocha-as-promised
+          - Promise多异步的协调, Promise其实就是队列处理
+        - Promises/B
+          http://wiki.commonjs.org/wiki/Promises/B
+          module: q
     - 事件驱动
     - 函数式编程
     - 调试
@@ -56,3 +89,11 @@
 7.  后续传递风格 - 进业务重点从返回值转到回调函数。
 8.  Events
 9.  将大量计算分为小量通过setImmediate调度
+10. js流程控制之尾触发(next) - 流式处理
+    libraries: async, step
+11. 异步并发控制
+    - 通过队列来控制
+    - 如果当前异步调用量小于限定值，从队列去除执行
+    - 如果队列调用量达到限定值，调用暂时加入队列
+    - 每个异步调用结束时，从新的队列取出调用
+    - 超时控制
