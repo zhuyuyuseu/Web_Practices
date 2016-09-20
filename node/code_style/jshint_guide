@@ -1,7 +1,0 @@
-1. http://jshint.com/ & http://jshint.com/about/
-2. jshint configuration: http://jshint.com/docs/options/
-3. sample .jshintrc file is stored under the folder from ka generator by JR
-4. npm install -g jshint
-5. for sumlime install JSHint plugin: https://github.com/uipoet/sublime-jshint
-6. related static check tools: jscs - http://jscs.info/
-7. use with grunt: https://github.com/gruntjs/grunt-contrib-jshint

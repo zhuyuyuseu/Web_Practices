@@ -1,5 +1,0 @@
-1. npm install -g express-generator
-2. express myapp
-3. cd myapp
-4. npm install
-5. set DEBUG=myapp & npm start (in windows)

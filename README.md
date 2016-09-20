@@ -1,2 +1,1 @@
-# Web_Practices
-Collection of practices with examples from real projects.
+## Please move this repo internally. I can help you do this if you need it :)
